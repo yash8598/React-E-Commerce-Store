@@ -3,6 +3,10 @@ import React from 'react';
 const CartPage = ({ cartItems, removeFromCart, total }) => {
   const cartItemIds = Object.keys(cartItems);
 
+  const handleCheckout = () => {
+    alert('Proceeding to Checkout');
+  };
+
   return (
     <div className="cart-page">
       <h1 className='cart-heading'>Shopping Cart</h1>
@@ -20,7 +24,7 @@ const CartPage = ({ cartItems, removeFromCart, total }) => {
                     <h3>{item.title}</h3>
                     <p>Price: ${item.price}</p>
                     <p>Quantity: {item.quantity}</p>
-                    <button onClick={() => removeFromCart(item)}>Remove</button>
+                    <button className='remove' onClick={() => removeFromCart(item)}><i className='fas fa-trash'></i> Remove</button>
                   </div>
                 </div>
               );
@@ -28,7 +32,7 @@ const CartPage = ({ cartItems, removeFromCart, total }) => {
           </div>
           <div className="cart-total">
             <h3>Total: ${total.toFixed(2)}</h3>
-            <button>Proceed to Checkout</button>
+            <button className='checkout' onClick={handleCheckout}>Proceed to Checkout</button>
           </div>
         </>
       )}

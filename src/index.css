@@ -1,11 +1,13 @@
 /* Reset default margin and padding */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 body, h1, h2, h3, p, ul, li {
   margin: 0;
   padding: 0;
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Poppins' !important;
   background-color: #f9f9f9;
   color: #333;
 }
@@ -84,16 +86,19 @@ main {
 
 .product {
   border: 1px solid rgb(66, 66, 66);
-  padding: 1rem;
+  padding: 2rem;
+  padding-bottom: 3rem;
   border-radius: 4px;
   text-align: center;
   background-color: white;
+  cursor: pointer;
+  position: relative;
 }
 
 .product img {
   max-width: 100%;
   height: 200px;
-  object-fit: cover;
+  object-fit:contain;
   border-radius: 4px;
   margin-bottom: 1rem;
 }
@@ -101,11 +106,28 @@ main {
 .product h3 {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
+  font-weight: 600;
 }
 
 .product p {
   margin-bottom: 0.5rem;
 }
+
+.product-rating {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  color: white;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+}
+
 
 .pagination {
   display: flex;
@@ -147,7 +169,8 @@ main {
 }
 
 .cart-item img {
-  max-width: 80px;
+  height: 120px;
+  max-width: 120px;
   margin-right: 1rem;
 }
 
@@ -172,10 +195,70 @@ button {
   padding: 0.5rem 1rem;
   border-radius: 4px;
   transition: background-color 0.3s;
+  font-family: 'Poppins';
 }
 
 button:hover {
   background-color: #0056b3;
+}
+
+.checkout {
+  cursor: pointer;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.checkout:hover {
+  background-color: #22893a;
+}
+
+.remove {
+  cursor: pointer;
+  background-color: rgb(228, 66, 66);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.remove:hover {
+  background-color: rgb(190, 32, 32);
+}
+
+.addToCartButton {
+  cursor: pointer;
+  background-color: #00aeff;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 2rem;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  position: absolute;
+  bottom: 15px;
+  left: 110px;
+}
+
+.addToCartButton:hover {
+  background-color: #1586ba;
+}
+
+.addToCartButtonModal {
+  cursor: pointer;
+  background-color: #00aeff;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.addToCartButtonModal:hover {
+  background-color: #1586ba;
 }
 
 /* Add these styles for disabled buttons */
@@ -188,3 +271,71 @@ button[disabled] {
 .pagination span.active {
   font-weight: bold;
 }
+
+/* Add modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.modal {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 800px; /* Set a fixed width for the modal */
+  max-width: 100%; /* Ensure the modal doesn't exceed the viewport width */
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.modal-header h3 {
+  font-size: 1.2rem;
+}
+
+.modal-header button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  font-size: 1.2rem;
+  color: #1b1b1b;
+}
+
+.modal-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.modal-body img {
+  max-width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.modal-body p {
+  margin-bottom: 0.5rem;
+}
+
+.modal-body button {
+  margin-top: 1rem;
+}
+
