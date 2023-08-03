@@ -1,4 +1,5 @@
 import React from 'react';
+import { getRatingColor } from './HomePage';
 
 const ProductModal = ({ showModal, selectedProduct, addToCart, setShowModal }) => {
   if (!showModal || !selectedProduct) return null;
@@ -11,10 +12,17 @@ const ProductModal = ({ showModal, selectedProduct, addToCart, setShowModal }) =
           <button onClick={() => setShowModal(false)}><i className='fas fa-times'></i></button>
         </div>
         <div className="modal-body">
+        <div className="product-rating-modal" ><span style={{ color: getRatingColor(selectedProduct.rating.rate) }}>
+              {selectedProduct.rating.rate} <i className='fas fa-star'></i></span> <span style={{ color: "grey"}}> &nbsp; {selectedProduct.rating.count}</span>
+            </div>
           <img src={selectedProduct.image} alt={selectedProduct.title} />
-          <p>Category: {selectedProduct.category}</p>
-          <p>Product Details: {selectedProduct.description}</p>
-          <p>Price: ${selectedProduct.price}</p>
+          <table className='productTable'> 
+            <tbody>
+              <tr><th>Category</th><td>{selectedProduct.category}</td></tr>
+              <tr><th>Description</th><td>{selectedProduct.description}</td></tr>
+              <tr><th>Price</th><td>${selectedProduct.price}</td></tr>
+            </tbody>
+          </table>
           <button className='addToCartButtonModal'
             onClick={() => {
               addToCart(selectedProduct);

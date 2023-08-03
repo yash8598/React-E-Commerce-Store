@@ -14,11 +14,17 @@ body {
 
 header {
   background-color: #333;
-  padding: 1rem 0;
+  padding: 1rem 200px;
 }
 
 nav {
   text-align: center;
+}
+
+.navbar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 ul {
@@ -46,8 +52,12 @@ main {
 }
 
 .app {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
+}
+
+.home{
+  font-size: larger;
 }
 
 .home:hover {
@@ -56,6 +66,10 @@ main {
 
 .cart:hover {
   color: #fff;
+}
+
+.cart{
+  position: relative;
 }
 
 .search-bar {
@@ -80,7 +94,7 @@ main {
 
 .product-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, minmax(300px, 1fr));
   gap: 1rem;
 }
 
@@ -93,6 +107,11 @@ main {
   background-color: white;
   cursor: pointer;
   position: relative;
+  transition: box-shadow 0.3s ease;
+}
+
+.product:hover{
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .product img {
@@ -109,6 +128,17 @@ main {
   font-weight: 600;
 }
 
+.productTable{
+  text-align: left;
+  border: 1px solid #8e9296;
+  border-collapse: collapse;
+}
+
+.productTable th, td {
+  border: 1px solid #8e9296;
+  padding: 8px;
+}
+
 .product p {
   margin-bottom: 0.5rem;
 }
@@ -116,6 +146,21 @@ main {
 .product-rating {
   position: absolute;
   top: 10px;
+  right: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  color: white;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.product-rating-modal {
+  position: absolute;
+  top: 0px;
   right: 10px;
   display: inline-flex;
   align-items: center;
@@ -161,6 +206,17 @@ main {
   padding-bottom: 1rem;
 }
 
+.cart-badge {
+  position: absolute;
+  top: -12px;
+  right: 51px;
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+
 .cart-item {
   display: flex;
   margin-bottom: 1rem;
@@ -170,7 +226,8 @@ main {
 
 .cart-item img {
   height: 120px;
-  max-width: 120px;
+  width: 120px; 
+  object-fit: contain; 
   margin-right: 1rem;
 }
 
@@ -321,6 +378,8 @@ button[disabled] {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
+  padding-top: 10px;
 }
 
 .modal-body img {

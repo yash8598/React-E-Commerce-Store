@@ -1,4 +1,3 @@
-// App.js
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import HomePage from './HomePage';
@@ -52,27 +51,35 @@ const App = () => {
     return Object.values(cartItems).reduce((total, item) => total + item.price * item.quantity, 0);
   };
 
+  // Get the total quantity of items in the cart
+  const totalQuantity = Object.values(cartItems).reduce((total, item) => total + item.quantity, 0);
+
   return (
     <Router>
+      <header>
+        <nav>
+          <ul className='navbar'>
+            <li><Link className='home' to="/"><i className='fas fa-store'></i> Ecommerce</Link></li>
+            <li>
+              <Link className='cart' to="/cart">
+                <i className='fas fa-shopping-cart'></i> Cart
+                {totalQuantity > 0 && <span className="cart-badge">{totalQuantity}</span>}
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </header>
       <div className="app">
-        <header>
-          <nav> 
-            <ul>
-              <li><Link className='home' to="/"><i className='fas fa-home'></i> Home</Link></li>
-              <li><Link className='cart' to="/cart"><i className='fas fa-shopping-cart'></i> Cart</Link></li>
-            </ul>
-          </nav>
-        </header>
         <main>
           <Routes>
             {/* Homepage route */}
             <Route exact path="/" element={<HomePage products={Object.values(products)} addToCart={addToCart} />} />
             {/* Shopping cart route */}
             <Route path="/cart" element={<CartPage
-                cartItems={cartItems}
-                removeFromCart={removeFromCart}
-                total={calculateTotalPrice()}
-              />} />
+              cartItems={cartItems}
+              removeFromCart={removeFromCart}
+              total={calculateTotalPrice()}
+            />} />
           </Routes>
         </main>
       </div>

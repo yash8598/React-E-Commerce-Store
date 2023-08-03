@@ -1,8 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import ProductModal from './ProductModal';
 
+// Function to get the color based on the rating value
+export const getRatingColor = (rating) => {
+  if (rating >= 0 && rating < 1) {
+    return '#ff0000';
+  } else if (rating >= 1 && rating < 2) {
+    return '#ff6600'; 
+  } else if (rating >= 2 && rating < 3) {
+    return '#ffd700'; 
+  } else if (rating >= 3 && rating < 4) {
+    return '#90ee90';
+  } else if (rating >= 4 && rating <= 5) {
+    return '#008000'; 
+  } else {
+    return '#808080'; 
+  }
+};
+
+
 const HomePage = ({ products, addToCart }) => {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1); 
   const [itemsPerPage] = useState(10);
   const [searchCategory, setSearchCategory] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -71,22 +89,7 @@ const HomePage = ({ products, addToCart }) => {
     setSelectedProduct(product);
   };
 
-// Function to get the color based on the rating value
-const getRatingColor = (rating) => {
-  if (rating >= 0 && rating < 1) {
-    return '#ff0000';
-  } else if (rating >= 1 && rating < 2) {
-    return '#ff6600'; 
-  } else if (rating >= 2 && rating < 3) {
-    return '#ffd700'; 
-  } else if (rating >= 3 && rating < 4) {
-    return '#90ee90';
-  } else if (rating >= 4 && rating <= 5) {
-    return '#008000'; 
-  } else {
-    return '#808080'; 
-  }
-};
+
 
   return (
     <div className="homepage">
