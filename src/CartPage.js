@@ -1,11 +1,44 @@
-import React from 'react';
+import { useState } from 'react';
 
-const CartPage = ({ cartItems, removeFromCart, total }) => {
+
+const CartPage = ({ cartItems, removeFromCart, addToCart, total }) => {
   const cartItemIds = Object.keys(cartItems);
+  const [cartMessage, setCartMessage] = useState('');
 
   const handleCheckout = () => {
     alert('Proceeding to Checkout');
   };
+
+  // Function to handle adding items to the cart
+  const handleRemoveFromCart = (item) => {
+    if (item.quantity > 1) {
+      removeFromCart(item);
+      setCartMessage(<div className="cart-message-minus"><i className='fas fa-minus'></i> Removed Item</div>);
+    } else {
+      removeFromCart(item);
+      setCartMessage(<div className="cart-message-minus"><i className='fas fa-trash'></i> Removed from Cart</div>);
+    }
+    setTimeout(() => {
+      setCartMessage('');
+    }, 1000);
+  };
+
+  // Function to handle adding items to the cart
+  const handleAddToCart = (item) => {
+    addToCart(item);
+    setCartMessage(<div className="cart-message"><i className='fas fa-plus'></i> Added Item</div>);
+    setTimeout(() => {
+      setCartMessage('');
+    }, 1000);
+  };
+
+  const handleRemoveBtn = (item) => {
+    if (item.quantity > 1) {
+      return <i className='fas fa-minus'></i>
+    } else {
+      return <i className='fas fa-trash'></i>
+    }
+  }
 
   return (
     <div className="cart-page">
@@ -22,9 +55,22 @@ const CartPage = ({ cartItems, removeFromCart, total }) => {
                   <img src={item.image} alt={item.title} />
                   <div className="item-details">
                     <h3>{item.title}</h3>
+                    <p>Category: {item.category}</p>
                     <p>Price: ${item.price}</p>
-                    <p>Quantity: {item.quantity}</p>
-                    <button className='remove' onClick={() => removeFromCart(item)}><i className='fas fa-trash'></i> Remove</button>
+                    <div className="quantity-btns">
+
+                      <button className='quantity-btn minus' onClick={(e) => {
+                        e.stopPropagation();
+                        handleRemoveFromCart(item);
+                      }}> {handleRemoveBtn(item)
+                      }</button>
+
+                      <span className="quantity">{item.quantity}</span>
+                      <button className='quantity-btn plus' onClick={(e) => {
+                        e.stopPropagation();
+                        handleAddToCart(item);
+                      }}><i className='fas fa-plus'></i></button>
+                    </div>
                   </div>
                 </div>
               );
@@ -36,6 +82,9 @@ const CartPage = ({ cartItems, removeFromCart, total }) => {
           </div>
         </>
       )}
+
+      {/* Display the cart message */}
+      {cartMessage && <div>{cartMessage}</div>}
     </div>
   );
 };

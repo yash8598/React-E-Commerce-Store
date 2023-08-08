@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import HomePage from './HomePage';
 import CartPage from './CartPage';
+import ProductModal from './ProductModal';
 
 const App = () => {
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState({});
+  const [cartMessage, setCartMessage] = useState('');
 
   useEffect(() => {
     // Fetch the list of products from the FakestoreAPI
@@ -73,16 +75,24 @@ const App = () => {
         <main>
           <Routes>
             {/* Homepage route */}
-            <Route exact path="/" element={<HomePage products={Object.values(products)} addToCart={addToCart} />} />
+            <Route exact path="/" element={<HomePage products={Object.values(products)} addToCart={addToCart} removeFromCart={removeFromCart} cartMessage={cartMessage} />} />
             {/* Shopping cart route */}
             <Route path="/cart" element={<CartPage
               cartItems={cartItems}
               removeFromCart={removeFromCart}
+              addToCart={addToCart}
               total={calculateTotalPrice()}
             />} />
           </Routes>
         </main>
       </div>
+      {/* Modal */}
+      <ProductModal
+        addToCart={addToCart}
+        removeFromCart={removeFromCart}
+        cartMessage={cartMessage}
+        setCartMessage={setCartMessage}
+      />
     </Router>
   );
 };

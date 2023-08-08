@@ -18,22 +18,20 @@ export const getRatingColor = (rating) => {
   }
 };
 
-
 const HomePage = ({ products, addToCart }) => {
-  const [currentPage, setCurrentPage] = useState(1); 
+  const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
-  const [searchCategory, setSearchCategory] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [cartMessage, setCartMessage] = useState('');
+  const [searchInput, setSearchInput] = useState('');
 
   useEffect(() => {
     // Filter products based on the selected category
-    if (searchCategory.trim() !== '') {
-      // Split search term into individual words
-      const searchTerms = searchCategory.toLowerCase().split(/\s+/);
+    if (searchInput.trim() !== '') {
+      const searchTerms = searchInput.toLowerCase().split(/\s+/);
 
-      // Filter products based on search terms
       const filteredItems = products.filter((product) => {
         const category = product.category.toLowerCase();
         return searchTerms.every((term) => category.split(/\s+/).includes(term));
@@ -43,39 +41,21 @@ const HomePage = ({ products, addToCart }) => {
     } else {
       setFilteredProducts(products);
     }
-  }, [searchCategory, products]);
-
-  // Get current items to display on the current page
+    setCurrentPage(1); 
+  }, [searchInput, products]);
+    
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredProducts.slice(indexOfFirstItem, indexOfLastItem);
 
-  // Change page number
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  // Function to handle the search button click
-  const handleSearch = () => {
-    if (searchCategory.trim() !== '') {
-      const searchTerms = searchCategory.toLowerCase().split(/\s+/);
-      const filteredItems = products.filter((product) => {
-        const category = product.category.toLowerCase();
-        return searchTerms.every((term) => category.split(/\s+/).includes(term));
-      });
-      setFilteredProducts(filteredItems);
-    } else {
-      setFilteredProducts(products);
-    }
-    setCurrentPage(1); // Reset current page to 1 after search
-  };
-
-  // Function to handle previous page
   const handlePreviousPage = () => {
     if (currentPage > 1) {
       setCurrentPage((prevPage) => prevPage - 1);
     }
   };
 
-  // Function to handle next page
   const handleNextPage = () => {
     const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
     if (currentPage < totalPages) {
@@ -83,13 +63,28 @@ const HomePage = ({ products, addToCart }) => {
     }
   };
 
-  // Function to handle the click on the product card
   const handleProductCardClick = (product) => {
     setShowModal(true);
     setSelectedProduct(product);
   };
 
+  const handleAddToCart = (item) => {
+    addToCart(item);
+    setCartMessage(<div className="cart-message"><i className='fas fa-check'></i> Added to Cart</div>);
+    setTimeout(() => {
+      setCartMessage('');
+    }, 1000); 
+  };
 
+  const handleSearchClick = () => {
+    const searchTerms = searchInput.toLowerCase().split(/\s+/);
+    const filteredItems = products.filter((product) => {
+      const category = product.category.toLowerCase();
+      return searchTerms.every((term) => category.split(/\s+/).includes(term));
+    });
+    setFilteredProducts(filteredItems);
+    setCurrentPage(1);
+  };
 
   return (
     <div className="homepage">
@@ -98,10 +93,10 @@ const HomePage = ({ products, addToCart }) => {
         <input
           type="text"
           placeholder="Search by category..."
-          value={searchCategory}
-          onChange={(e) => setSearchCategory(e.target.value)}
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
         />
-        <button onClick={handleSearch}>
+        <button onClick={handleSearchClick}>
           <i className="fas fa-search"></i> Search
         </button>
       </div>
@@ -110,16 +105,24 @@ const HomePage = ({ products, addToCart }) => {
           <div
             key={product.id}
             className="product"
-            onClick={() => handleProductCardClick(product)} 
+            onClick={() => handleProductCardClick(product)}
           >
-            <div className="product-rating" ><span style={{ color: getRatingColor(product.rating.rate) }}>
-              {product.rating.rate} <i className='fas fa-star'></i></span> 
+            <div className="product-rating">
+              <span style={{ color: getRatingColor(product.rating.rate) }}>
+                {product.rating.rate} <i className="fas fa-star"></i>
+              </span>
             </div>
             <img src={product.image} alt={product.title} />
             <h3>{product.title}</h3>
             <p>Category: {product.category}</p>
             <p>Price: ${product.price}</p>
-            <button className="addToCartButton" onClick={(e) => { e.stopPropagation(); addToCart(product); }}>
+            <button
+              className="addToCartButton"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleAddToCart(product);
+              }}
+            >
               Add to Cart
             </button>
           </div>
@@ -153,6 +156,9 @@ const HomePage = ({ products, addToCart }) => {
         addToCart={addToCart}
         setShowModal={setShowModal}
       />
+
+      {/* Display the cart message */}
+      {cartMessage && <div>{cartMessage}</div>}
     </div>
   );
 };

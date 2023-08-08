@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useState }  from 'react';
 import { getRatingColor } from './HomePage';
 
 const ProductModal = ({ showModal, selectedProduct, addToCart, setShowModal }) => {
+  const [cartMessage, setCartMessage] = useState('');
   if (!showModal || !selectedProduct) return null;
+  
+
+
+  // Function to handle adding items to the cart
+  const handleAddToCart = (item) => {
+    addToCart(item);
+    setCartMessage(' Added to cart');
+    console.log('added')
+    setTimeout(() => {
+      setCartMessage('');
+    }, 1000); 
+  };
+
 
   return (
-    <div className="modal-overlay" onClick={() => setShowModal(false)}>
+    <div className="modal-overlay">
       <div className="modal">
         <div className="modal-header">
           <h3>{selectedProduct.title}</h3>
@@ -25,14 +39,15 @@ const ProductModal = ({ showModal, selectedProduct, addToCart, setShowModal }) =
           </table>
           <button className='addToCartButtonModal'
             onClick={() => {
-              addToCart(selectedProduct);
-              setShowModal(false);
+              handleAddToCart(selectedProduct);
+              setShowModal(true);
             }}
           >
             Add to Cart
           </button>
         </div>
       </div>
+      {cartMessage && <div className="cart-message"><i className='fas fa-check'></i>{cartMessage}</div>}
     </div>
   );
 };
