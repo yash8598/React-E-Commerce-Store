@@ -25,7 +25,7 @@ Home Page
 
 <img src="https://github.com/yash8598/React-E-Commerce-Store/blob/main/demo/home.png?raw=true" alt="Home Page" width="500px">
 
-<br />
+
 Cart Page
 
 <img src="https://github.com/yash8598/React-E-Commerce-Store/blob/main/demo/cart.png?raw=true" alt="Cart Page" width="500px">
