@@ -16,14 +16,13 @@ Welcome to the Ecommerce Website project! This project is a simple ecommerce web
 - [Demo](#demo)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Demo
 
 Here's a glimpse of what the Ecommerce Website looks like:
 
-[Insert a screenshot or GIF of your website here]
+![alt text](https://github.com/yash8598/React-E-Commerce-Store/blob/main/demo/home.png?raw=true)
+![alt text](https://github.com/yash8598/React-E-Commerce-Store/blob/main/demo/cart.png?raw=true)
 
 ## Installation
 
