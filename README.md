@@ -9,7 +9,6 @@ Welcome to the Ecommerce Website project! This project is a simple ecommerce web
 - Add products to the cart and adjust quantities.
 - View and edit items in the cart.
 - Calculate and display the total price.
-- Responsive design for various screen sizes.
 
 ## Table of Contents
 
