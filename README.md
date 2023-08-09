@@ -21,11 +21,13 @@ Welcome to the Ecommerce Website project! This project is a simple ecommerce web
 
 Here's a glimpse of what the Ecommerce Website looks like:
 
-<h6>Home Page</h6>
+Home Page
+
 <img src="https://github.com/yash8598/React-E-Commerce-Store/blob/main/demo/home.png?raw=true" alt="Home Page" width="500px">
 
 <br />
-<h6>Cart Page</h6>
+Cart Page
+
 <img src="https://github.com/yash8598/React-E-Commerce-Store/blob/main/demo/cart.png?raw=true" alt="Cart Page" width="500px">
 
 
