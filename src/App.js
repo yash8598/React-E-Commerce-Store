@@ -75,7 +75,13 @@ const App = () => {
         <main>
           <Routes>
             {/* Homepage route */}
-            <Route exact path="/" element={<HomePage products={Object.values(products)} addToCart={addToCart} removeFromCart={removeFromCart} cartMessage={cartMessage} />} />
+            <Route exact path="/" element={<HomePage 
+            products={Object.values(products)} 
+            addToCart={addToCart} 
+            removeFromCart={removeFromCart} 
+            cartMessage={cartMessage} 
+            cartItems={cartItems}
+            />} />
             {/* Shopping cart route */}
             <Route path="/cart" element={<CartPage
               cartItems={cartItems}
@@ -92,6 +98,7 @@ const App = () => {
         removeFromCart={removeFromCart}
         cartMessage={cartMessage}
         setCartMessage={setCartMessage}
+        cartItems={cartItems}
       />
     </Router>
   );

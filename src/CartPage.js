@@ -42,7 +42,7 @@ const CartPage = ({ cartItems, removeFromCart, addToCart, total }) => {
 
   return (
     <div className="cart-page">
-      <h1 className='cart-heading'>Shopping Cart</h1>
+      <h1 className='cart-heading'>My Cart</h1>
       {cartItemIds.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
@@ -75,7 +75,7 @@ const CartPage = ({ cartItems, removeFromCart, addToCart, total }) => {
                 </div>
               );
             })}
-          </div>
+            </div>
           <div className="cart-total">
             <h3>Total: ${total.toFixed(2)}</h3>
             <button className='checkout' onClick={handleCheckout}>Proceed to Checkout</button>

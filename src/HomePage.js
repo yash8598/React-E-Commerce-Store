@@ -18,7 +18,7 @@ export const getRatingColor = (rating) => {
   }
 };
 
-const HomePage = ({ products, addToCart }) => {
+const HomePage = ({ products, addToCart, cartItems }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -41,7 +41,6 @@ const HomePage = ({ products, addToCart }) => {
     } else {
       setFilteredProducts(products);
     }
-    setCurrentPage(1); 
   }, [searchInput, products]);
     
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -76,6 +75,10 @@ const HomePage = ({ products, addToCart }) => {
     }, 1000); 
   };
 
+
+
+  
+
   const handleSearchClick = () => {
     const searchTerms = searchInput.toLowerCase().split(/\s+/);
     const filteredItems = products.filter((product) => {
@@ -92,11 +95,11 @@ const HomePage = ({ products, addToCart }) => {
       <div className="search-bar">
         <input
           type="text"
-          placeholder="Search by category..."
+          placeholder="Search by category "
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
         />
-        <button onClick={handleSearchClick}>
+        <button className='btn btn-secondary' onClick={handleSearchClick}>
           <i className="fas fa-search"></i> Search
         </button>
       </div>
@@ -104,7 +107,7 @@ const HomePage = ({ products, addToCart }) => {
         {currentItems.map((product) => (
           <div
             key={product.id}
-            className="product"
+            className="product d-flex justify-content-around align-items-center flex-column"
             onClick={() => handleProductCardClick(product)}
           >
             <div className="product-rating">
@@ -117,31 +120,33 @@ const HomePage = ({ products, addToCart }) => {
             <p>Category: {product.category}</p>
             <p>Price: ${product.price}</p>
             <button
-              className="addToCartButton"
+              className="addToCartButton btn btn-primary"
               onClick={(e) => {
                 e.stopPropagation();
                 handleAddToCart(product);
               }}
             >
-              Add to Cart
+              {cartItems[product.id] && cartItems[product.id].quantity > 0
+              ? 'Add More'
+              : 'Add to Cart'}
             </button>
           </div>
         ))}
       </div>
       <div className="pagination">
-        <button onClick={handlePreviousPage} disabled={currentPage === 1}>
+        <button className='btn btn-secondary' onClick={handlePreviousPage} disabled={currentPage === 1}>
           Previous
         </button>
         {Array.from({ length: Math.ceil(filteredProducts.length / itemsPerPage) }, (_, i) => i + 1).map((pageNumber) => (
           <span
             key={pageNumber}
             onClick={() => paginate(pageNumber)}
-            className={currentPage === pageNumber ? 'active' : ''}
+            className={currentPage === pageNumber ? 'btn btn-dark active' : 'btn btn-secondary'}
           >
             {pageNumber}
           </span>
         ))}
-        <button
+        <button className='btn btn-secondary'
           onClick={handleNextPage}
           disabled={currentPage === Math.ceil(filteredProducts.length / itemsPerPage)}
         >
@@ -155,6 +160,7 @@ const HomePage = ({ products, addToCart }) => {
         selectedProduct={selectedProduct}
         addToCart={addToCart}
         setShowModal={setShowModal}
+        cartItems={cartItems}
       />
 
       {/* Display the cart message */}

@@ -4,11 +4,11 @@
 body, h1, h2, h3, p, ul, li {
   margin: 0;
   padding: 0;
+
 }
 
 body {
   font-family: 'Poppins' !important;
-  background-color: #f9f9f9;
   color: #333;
 }
 
@@ -57,19 +57,23 @@ main {
 }
 
 .home{
-  font-size: larger;
+  font-size: x-large;
+  
 }
 
 .home:hover {
   color: #fff;
+  text-decoration: none;
 }
 
 .cart:hover {
   color: #fff;
+  text-decoration: none;
 }
 
 .cart{
   position: relative;
+  font-size: larger;
 }
 
 .search-bar {
@@ -86,9 +90,9 @@ main {
 }
 
 .search-bar button {
-  padding: 8px 16px;
+  padding: 9.5px 16px;
   font-size: 16px;
-  margin-left: 8px;
+  margin-left: 5px;
 }
 
 
@@ -101,13 +105,15 @@ main {
 .product {
   border: 1px solid rgb(66, 66, 66);
   padding: 2rem;
-  padding-bottom: 3rem;
+  padding-top: 2rem;
+  padding-bottom: 4rem;
   border-radius: 4px;
   text-align: center;
   background-color: white;
   cursor: pointer;
   position: relative;
   transition: box-shadow 0.3s ease;
+  height: 474px;
 }
 
 .product:hover{
@@ -183,13 +189,12 @@ main {
 .pagination span {
   cursor: pointer;
   padding: 0.5rem;
-  margin: 0 0.2rem;
-  border: 1px solid #007bff;
+  margin: 0 0.1rem;
   border-radius: 4px;
 }
 
 .pagination span.active {
-  background-color: #007bff;
+  border: 2px solid #1e1e1e;
   color: #fff;
 }
 
@@ -208,8 +213,8 @@ main {
 
 .cart-badge {
   position: absolute;
-  top: -12px;
-  right: 51px;
+  top: -14px;
+  right: 60px;
   background-color: #007bff;
   color: white;
   font-size: 12px;
@@ -307,20 +312,6 @@ main {
 }
 
 
-button {
-  cursor: pointer;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: background-color 0.3s;
-  font-family: 'Poppins';
-}
-
-button:hover {
-  background-color: #0056b3;
-}
 
 .checkout {
   cursor: pointer;
@@ -351,34 +342,10 @@ button:hover {
 }
 
 .addToCartButton {
-  cursor: pointer;
-  background-color: #00aeff;
-  color: #fff;
-  border: none;
+  margin-top: 15px;
   padding: 0.5rem 2rem;
-  border-radius: 4px;
-  transition: background-color 0.3s;
   position: absolute;
   bottom: 15px;
-  left: 110px;
-}
-
-.addToCartButton:hover {
-  background-color: #1586ba;
-}
-
-.addToCartButtonModal {
-  cursor: pointer;
-  background-color: #00aeff;
-  color: #fff;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: background-color 0.3s;
-}
-
-.addToCartButtonModal:hover {
-  background-color: #1586ba;
 }
 
 /* Add these styles for disabled buttons */
@@ -393,27 +360,28 @@ button[disabled] {
 }
 
 /* Add modal styles */
-.modal-overlay {
+.modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
 }
 
-.modal {
+/* Modal Box */
+.modal-content {
   background-color: #fff;
-  padding: 1rem;
   border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 800px; /* Set a fixed width for the modal */
-  max-width: 100%; /* Ensure the modal doesn't exceed the viewport width */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  width: 100%;
 }
+
 
 .modal-header {
   display: flex;
@@ -461,3 +429,17 @@ button[disabled] {
   margin-top: 1rem;
 }
 
+
+button.active.focus,
+button.active:focus,
+button.focus,
+button:active.focus,
+button:active:focus,
+button:focus
+ {
+    outline: 0;
+    outline-color: transparent;
+    outline-width: 0;
+    outline-style: none;
+    box-shadow: 0 0 0 0 rgba(0,123,255,0);
+}
