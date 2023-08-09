@@ -30,25 +30,25 @@ Here's a glimpse of what the Ecommerce Website looks like:
 Follow these steps to set up and run the Ecommerce Website locally:
 
 1. Clone this repository to your local machine using:
-git clone https://github.com/your-username/ecommerce-website.git
+### git clone https://github.com/your-username/ecommerce-website.git
 
 
 2. Navigate to the project directory:
-cd ecommerce-website
+### cd ecommerce-website
 
 
 3. Install the project dependencies using:
-npm install
+### npm install
 
 
 ## Usage
 
 1. Run the development server:
-npm start
+### npm start
 
 
 2. Open your web browser and navigate to:
-http://localhost:3000
+### http://localhost:3000
 
 3. Explore the website and its features. You can browse products, search by category, add items to the cart, and view the cart page.
 
